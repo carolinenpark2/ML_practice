@@ -1,0 +1,13 @@
+import pandas as pd
+import seaborn as sns
+%matplotlib inline   # import necessary packages 
+
+df = pd.read_csv('<file_name>.csv')    # read csv into a data frame 
+
+df.info()   # shows column names, data types, and nulls 
+
+del df['<column name>']   # to delete a column 
+
+df.drop('profit',axis=1, inplace = True)   # drop a column or row, axis = 1: column, axis = 0: row
+
+df.isnull().sum() # to check for missing values 
