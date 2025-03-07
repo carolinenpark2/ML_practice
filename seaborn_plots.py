@@ -20,3 +20,5 @@ sns.displot(df['<column of interest>'].dropna(), color='darkred', bins=30)
 # Add a line of best fit to the distribution plot 
 sns.displot(df['<column of interest>'].dropna(), kde = True, color='darkred', bins=30)
 
+# Histogram displaying values in a column of interest 
+sns.histplot(data=df, x='<column_name>', bins=40)
