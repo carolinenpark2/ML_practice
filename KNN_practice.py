@@ -34,3 +34,10 @@ scaled_x_test = scaler.transform(x_test)
 knn_model = KNeighborsClassifier(n_neighbors = 1)
 knn_model.fit(scaled_x_train, y_train)
 
+y_pred = knn_model.predict(scaled_x_test)
+accuracy_score(y_test, y_pred)
+confusion_matrix(y_test, y_pred)
+cm = ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred), display_labels=knn_model.classes_)
+cm.plot()
+
+print(classification_report(y_test, y_pred))
