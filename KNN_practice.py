@@ -41,3 +41,28 @@ cm = ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred), display_labels=knn
 cm.plot()
 
 print(classification_report(y_test, y_pred))
+
+# plotting error rate versus K to find the optimal K value 
+test_error_rate = []
+
+for k in range(1, 30):
+    knn_model = KNeighborsClassifier(n_neighbors = k)
+    knn_model.fit(scaled_x_train, y_train)
+    y_pred_test = knn_model.predict(scaled_x_test)
+    test_error = 1 - accuracy_score(y_test, y_pred_test)
+    test_error_rate.append(test_error)
+
+plt.figure(figsize = (10, 6), dpi = 200)
+plt.plot(range(1, 30), test_error_rate, label = 'Test Error')
+plt.legend()
+plt.xlabel('K Value')
+plt.ylabel('Error Rate')
+
+
+# use optimal K value in a new model 
+
+knn_model18 = KNeighborsClassifier(n_neighbors = 18)
+knn_model18.fit(scaled_x_train, y_train)
+y_pred = knn_model18.predict(scaled_x_test)
+accuracy_score(y_test, y_pred)
+confusion_matrix(y_test, y_pred)
