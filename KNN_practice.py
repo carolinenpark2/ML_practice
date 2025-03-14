@@ -66,3 +66,27 @@ knn_model18.fit(scaled_x_train, y_train)
 y_pred = knn_model18.predict(scaled_x_test)
 accuracy_score(y_test, y_pred)
 confusion_matrix(y_test, y_pred)
+
+# Re run model with GridSearchCV
+
+model=KNeighborsClassifier()
+K_values=list(range(1,30))
+param_grid = {'n_neighbors':K_values}
+grid_model = GridSearchCV(estimator=model, param_grid=param_grid, scoring = 'accuracy', cv = 10)
+
+grid_model.fit(x_train,y_train)
+grid_model.best_estimator_
+
+# using the K value GridSearchCV estimated (6)
+
+knn_model6 = KNeighborsClassifier(n_neighbors = 6)
+knn_model6.fit(scaled_x_train, y_train)
+y_pred = knn_model.predict(scaled_x_test)
+accuracy_score(y_test, y_pred)
+confusion_matrix(y_test, y_pred)
+
+scores=cross_validate(knn_model6,x_train,y_train,scoring=['balanced_accuracy'],cv=10)
+
+# turn cross validation scores into dataframe 
+scores=pd.DataFrame(scores)
+scores
