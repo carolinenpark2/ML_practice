@@ -34,3 +34,13 @@ sns.heatmap(df.isnull(), yticklabels=False,cbar=False,cmap='viridis')
 
 # drop the column labeled cabin, too many missing values
 df.drop('Cabin',axis = 1, inplace=True)
+
+# convert categorical features to dummy variables 
+pd.get_dummies(df['Sex'])
+newsex=pd.get_dummies(df['Sex'], drop_first=True)
+embark=pd.get_dummies(df['Embarked'], drop_first=True)
+df.drop(['PassengerId','Name','Sex','Ticket','Embarked'], axis=1, inplace=True)
+df=pd.concat([df, newsex, embark], axis=1)
+
+# Build a logistic regression model
+
