@@ -55,3 +55,19 @@ clf = logmodel.fit(x_train, y_train)
 logmodel.coef_
 
 sns.boxplot(x='Survived',y='Fare',data=df)
+
+# make predictions
+predictions = clf.predict(x_test)
+clf.predict_proba(x_test)
+
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+print(confusion_matrix(y_test, predictions))
+cm = ConfusionMatrixDisplay(confusion_matrix(y_test, predictions), display_labels=clf.classes_)
+cm.plot()
+plt.show()
+
+# accuracy and classification report 
+print(accuracy_score(y_test, predictions))
+
+from sklearn.metrics import classification_report
+print(classification_report(y_test, predictions))
