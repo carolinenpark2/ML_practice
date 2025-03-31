@@ -43,4 +43,15 @@ df.drop(['PassengerId','Name','Sex','Ticket','Embarked'], axis=1, inplace=True)
 df=pd.concat([df, newsex, embark], axis=1)
 
 # Build a logistic regression model
+x = df[['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'male', 'Q','S']]
+y = df['Survived']
 
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x,y,test_size = 0.3, random_state=101)
+from sklearn.linear_model import LogisticRegression
+
+logmodel = LogisticRegression()
+clf = logmodel.fit(x_train, y_train)
+logmodel.coef_
+
+sns.boxplot(x='Survived',y='Fare',data=df)
