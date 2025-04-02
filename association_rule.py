@@ -14,3 +14,15 @@ dataset.fillna('none', inplace = True)
 ds = dataset.values
 te = TransactionEncoder()
 te_array = te.fit_transform(ds)
+
+# array back to data frame 
+df = pd.DataFrame(te_array, columns = te.columns_)
+
+# drop missing values
+df = df.drop('none', axis = 1)
+
+# show frequent itemsets that appear together in at least 20% of transactions
+freq_itemsets = apriori(df, min_support = 0.2, use_colnames = True)
+
+# generate association rules from the frequent itemsets
+res = association_rules(freq_itemsets, metric = 'confidence', min_threshold = 0.4)
